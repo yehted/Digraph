@@ -20,18 +20,18 @@
 
 class Digraph {
 public:
-	Digraph();
-	Digraph(int V);
-	Digraph(std::istream& input);
-	~Digraph();
-	Digraph(const Digraph& G);
-	Digraph& operator=(const Digraph& G);
+	Digraph();								// Empty constructor
+	Digraph(int V);							// Constructor for V verticies
+	Digraph(std::istream& input);			// Constructor from input stream
+	~Digraph();								// Destructor
+	Digraph(const Digraph& G);				// Copy constructor
+	Digraph& operator=(const Digraph& G);	// Copy assignment operator
 
-	int V();
-	int E();
-	void addEdge(int v, int w);
-	Bag<int>* adj(int v);
-	Digraph reverse();
+	int V();								// Returns number of verticies
+	int E();								// Returns number of edges
+	void addEdge(int v, int w);				// Adds an edge between vertex v and w
+	Bag<int> adj(int v);					// Returns the vertices adjacent to vertex v
+	Digraph reverse();						// Returns the reverse of the digraph
 	friend std::ostream& operator<<(std::ostream& output, const Digraph& G);
 
 private:
