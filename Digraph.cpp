@@ -32,6 +32,8 @@ Digraph::~Digraph() {
 }
 
 Digraph::Digraph(const Digraph& G) : V_(G.V_), E_(G.E_) {
+	std::cout << "Copying" << std::endl;
+	adj_ = new Bag<int>[G.V_];
 	for (int v = 0; v < G.V_; v++) {
 		// reverse so that adjacency list is in the same order as original
 		Bag<int> reverse;
@@ -43,6 +45,7 @@ Digraph::Digraph(const Digraph& G) : V_(G.V_), E_(G.E_) {
 }
 
 Digraph& Digraph::operator=(const Digraph& G) {
+	std::cout << "Assigning" << std::endl;
 	if (this == &G) return *this;
 
 	// Free memory

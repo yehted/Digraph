@@ -12,6 +12,8 @@ int main(int argc, char* argv[]) {
 		exit(1);
 	}
 	Digraph G(inFile);
-	cout << G << endl;
+	Digraph H;
+	H = G;
+	cout << H << endl;
 	return 0;
 }
