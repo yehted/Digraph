@@ -55,7 +55,7 @@ public:
 	int V() const;								// Returns number of verticies
 	int E() const;								// Returns number of edges
 	void addEdge(int v, int w);					// Adds an edge between vertex v and w
-	Bag<int> adj(int v) const;					// Returns the vertices adjacent to vertex v
+	Bag<int>& adj(int v) const;					// Returns the vertices adjacent to vertex v
 	Digraph reverse();							// Returns the reverse of the digraph
 	friend std::ostream& operator<<(std::ostream& output, const Digraph& G);
 
