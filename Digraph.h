@@ -1,3 +1,27 @@
+/*************************************************************************
+*  Dependencies: Bag.h
+*
+*  A graph, implemented using an array of lists.
+*  Parallel edges and self-loops are permitted.
+*
+*  % Digraph tinyDG.txt
+*  13 vertices, 22 edges
+*  0: 5 1
+*  1:
+*  2: 0 3
+*  3: 5 2
+*  4: 3 2
+*  5: 4
+*  6: 9 4 8 0
+*  7: 6 9
+*  8: 6
+*  9: 11 10
+*  10: 12
+*  11: 4 12
+*  12: 9
+*
+*************************************************************************/
+
 /***************************************************************
 * The Digraph class represents a directed graph of vertices
 * named 0 through V.
