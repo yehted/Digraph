@@ -72,9 +72,9 @@ Digraph& Digraph::operator=(const Digraph& G) {
 	return *this;
 }
 
-int Digraph::V() { return V_; }
+int Digraph::V() const { return V_; }
 
-int Digraph::E() { return E_; }
+int Digraph::E() const { return E_; }
 
 void Digraph::addEdge(int v, int w) {
 	if (v < 0 || v >= V_) throw std::out_of_range("vertex is out of bounds");
@@ -83,7 +83,7 @@ void Digraph::addEdge(int v, int w) {
 	E_++;
 }
 
-Bag<int> Digraph::adj(int v) {
+Bag<int> Digraph::adj(int v) const {
 	if (v < 0 || v >= V_) throw std::out_of_range("vertex is out of bounds");
 	return adj_[v];
 }

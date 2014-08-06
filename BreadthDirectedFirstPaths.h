@@ -41,16 +41,21 @@
 **************************************************************/
 #include "Digraph.h"
 #include <limits>
+#include <Deque\Deque\Deque.h>
 
 class BreadthFirstDirectedPaths {
 public:
 	BreadthFirstDirectedPaths();
-	BreadthFirstDirectedPaths(Digraph G, int s);
-	BreadthFirstDirectedPaths(Digraph G, Bag<int> sources);
-	void bfs(Digraph G, int s);
-
+	BreadthFirstDirectedPaths(const Digraph& G, int s);
+	BreadthFirstDirectedPaths(const Digraph& G, Bag<int>& sources);
+	bool hasPathTo(int v);
+	int distTo(int v);
+	Deque<int> pathTo(int v);
 
 private:
+	void bfs(const Digraph& G, int s);
+	void bfs(const Digraph& G, Bag<int>& sources);
+
 	const int INF = std::numeric_limits<int>::max();
 	bool* marked_;
 	int* edgeTo_;

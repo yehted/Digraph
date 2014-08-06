@@ -39,7 +39,8 @@
 * For additional documentation, see Section 4.2 of Algorithms 4th
 * Edition, by Robert Sedgewick and Kevin Wayne.
 ****************************************************************/
-
+#ifndef DIGRAPH_H
+#define DIGRAPH_H
 #include <Bag\Bag\Bag.h>
 
 class Digraph {
@@ -51,11 +52,11 @@ public:
 	Digraph(const Digraph& G);				// Copy constructor
 	Digraph& operator=(const Digraph& G);	// Copy assignment operator
 
-	int V();								// Returns number of verticies
-	int E();								// Returns number of edges
-	void addEdge(int v, int w);				// Adds an edge between vertex v and w
-	Bag<int> adj(int v);					// Returns the vertices adjacent to vertex v
-	Digraph reverse();						// Returns the reverse of the digraph
+	int V() const;								// Returns number of verticies
+	int E() const;								// Returns number of edges
+	void addEdge(int v, int w);					// Adds an edge between vertex v and w
+	Bag<int> adj(int v) const;					// Returns the vertices adjacent to vertex v
+	Digraph reverse();							// Returns the reverse of the digraph
 	friend std::ostream& operator<<(std::ostream& output, const Digraph& G);
 
 private:
@@ -63,3 +64,4 @@ private:
 	int E_;			// Edges
 	Bag<int>* adj_;	// Adjacency array of bags
 };
+#endif
