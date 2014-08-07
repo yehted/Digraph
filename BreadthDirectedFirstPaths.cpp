@@ -6,14 +6,14 @@ BreadthFirstDirectedPaths::BreadthFirstDirectedPaths() {}
 BreadthFirstDirectedPaths::BreadthFirstDirectedPaths(const Digraph& G, int s) :
 	marked_(new bool[G.V()]()), distTo_(new int[G.V()]), edgeTo_(new int[G.V()]()) {
 	for (int v = 0; v < G.V(); v++)
-		distTo_[v] = INF;
+		distTo_[v] = INFINITY;
 	bfs(G, s);
 }
 
 BreadthFirstDirectedPaths::BreadthFirstDirectedPaths(const Digraph&G, Bag<int>& sources) :
 marked_(new bool[G.V()]()), distTo_(new int[G.V()]), edgeTo_(new int[G.V()]()) {
 	for (int v = 0; v < G.V(); v++)
-		distTo_[v] = INF;
+		distTo_[v] = INFINITY;
 	bfs(G, sources);
 }
 

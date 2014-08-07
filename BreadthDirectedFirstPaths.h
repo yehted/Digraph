@@ -39,6 +39,9 @@
 * 4th edition by Robert Sedgewick and Kevin Wayne.
 *
 **************************************************************/
+#ifndef BREADTHFIRSTDIRECTEDPATHS_H
+#define BREADTHFIRSTDIRECTEDPATHS_H
+
 #include "Digraph.h"
 #include <limits>
 #include <Deque\Deque\Deque.h>
@@ -56,8 +59,8 @@ private:
 	void bfs(const Digraph& G, int s);
 	void bfs(const Digraph& G, Bag<int>& sources);
 
-	const int INF = std::numeric_limits<int>::max();
 	bool* marked_;
 	int* edgeTo_;
 	int* distTo_;
 };
+#endif // !BREADTHFIRSTDIRECTEDPATHS_H

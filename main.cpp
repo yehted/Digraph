@@ -25,15 +25,18 @@ int digraph_main(int argc, char* argv[]) {
 int main(int argc, char* argv[]) {
 	using namespace std;
 	ifstream inFile;
-	inFile.open("tinyDG.txt");
-	//	inFile.open(argv[1]);
+//	inFile.open("tinyDG.txt");
+	inFile.open(argv[1]);
 	if (!inFile.is_open()) {
 		cerr << "File not opened!" << endl;
 		exit(1);
 	}
 	Digraph G(inFile);
 	cout << G << endl;
-	int s = 3;
+//	int s = 3;
+	int s;
+	cout << "Start: ";
+	cin >> s;
 	BreadthFirstDirectedPaths bfs(G, s);
 	for (int v = 0; v < G.V(); v++) {
 		if (bfs.hasPathTo(v)) {
