@@ -1,6 +1,7 @@
 #include "Digraph.h"
 #include <stdexcept>
 #include <iostream>
+#include <fstream>
 
 Digraph::Digraph() : V_(0), E_(0) {}
 
@@ -106,4 +107,21 @@ std::ostream& operator<<(std::ostream& output, const Digraph& G) {
 		output << std::endl;
 	}
 	return output;
+}
+
+// Digraph test
+int digraph_test(int argc, char* argv[]) {
+	using namespace std;
+	ifstream inFile;
+	inFile.open("tinyDG.txt");
+	//	inFile.open(argv[1]);
+	if (!inFile.is_open()) {
+		cerr << "File not opened!" << endl;
+		exit(1);
+	}
+	Digraph G(inFile);
+	Digraph H;
+	H = G;
+	cout << H << endl;
+	return 0;
 }

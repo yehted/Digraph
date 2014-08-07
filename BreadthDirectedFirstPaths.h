@@ -51,6 +51,9 @@ public:
 	BreadthFirstDirectedPaths();
 	BreadthFirstDirectedPaths(const Digraph& G, int s);
 	BreadthFirstDirectedPaths(const Digraph& G, Bag<int>& sources);
+	~BreadthFirstDirectedPaths();
+	BreadthFirstDirectedPaths(const BreadthFirstDirectedPaths& other);
+	BreadthFirstDirectedPaths& operator=(const BreadthFirstDirectedPaths& other);
 	bool hasPathTo(int v);
 	int distTo(int v);
 	Deque<int> pathTo(int v);
@@ -62,5 +65,6 @@ private:
 	bool* marked_;
 	int* edgeTo_;
 	int* distTo_;
+	int V_;
 };
 #endif // !BREADTHFIRSTDIRECTEDPATHS_H

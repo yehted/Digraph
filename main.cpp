@@ -22,7 +22,7 @@ int digraph_main(int argc, char* argv[]) {
 }
 
 // BreadthDirectedFirstPaths test
-int main(int argc, char* argv[]) {
+int BDFP_main(int argc, char* argv[]) {
 	using namespace std;
 	ifstream inFile;
 //	inFile.open("tinyDG.txt");
