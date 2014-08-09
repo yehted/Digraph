@@ -1,7 +1,5 @@
 #include "Digraph.h"
 #include <stdexcept>
-#include <iostream>
-#include <fstream>
 
 Digraph::Digraph() : V_(0), E_(0) {}
 
@@ -24,7 +22,8 @@ Digraph::Digraph(std::istream& input) {
 		}
 	}
 	catch (const std::invalid_argument& ia) {
-		std::cerr << "Invalid argument: " << ia.what() << std::endl;
+//		std::cerr << "Invalid argument: " << ia.what() << std::endl;
+		printf("Invalid argument: %s", ia.what());
 	}
 }
 
@@ -33,7 +32,7 @@ Digraph::~Digraph() {
 }
 
 Digraph::Digraph(const Digraph& G) : V_(G.V_), E_(G.E_) {
-	std::cout << "Copying Digraph" << std::endl;
+	printf("Copying Digraph");
 	adj_ = new Bag<int>[G.V_];
 	for (int v = 0; v < G.V_; v++) {
 		// reverse so that adjacency list is in the same order as original
@@ -46,7 +45,7 @@ Digraph::Digraph(const Digraph& G) : V_(G.V_), E_(G.E_) {
 }
 
 Digraph& Digraph::operator=(const Digraph& G) {
-	std::cout << "Assigning Digraph" << std::endl;
+	printf("Assigning Digraph");
 	if (this == &G) return *this;
 
 	// Free memory
@@ -107,21 +106,4 @@ std::ostream& operator<<(std::ostream& output, const Digraph& G) {
 		output << std::endl;
 	}
 	return output;
-}
-
-// Digraph test
-int digraph_test(int argc, char* argv[]) {
-	using namespace std;
-	ifstream inFile;
-	inFile.open("tinyDG.txt");
-	//	inFile.open(argv[1]);
-	if (!inFile.is_open()) {
-		cerr << "File not opened!" << endl;
-		exit(1);
-	}
-	Digraph G(inFile);
-	Digraph H;
-	H = G;
-	cout << H << endl;
-	return 0;
 }
