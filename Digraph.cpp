@@ -32,7 +32,7 @@ Digraph::~Digraph() {
 }
 
 Digraph::Digraph(const Digraph& G) : V_(G.V_), E_(G.E_) {
-	printf("Copying Digraph");
+	printf("Copying Digraph\n");
 	adj_ = new Bag<int>[G.V_];
 	for (int v = 0; v < G.V_; v++) {
 		// reverse so that adjacency list is in the same order as original
@@ -45,7 +45,7 @@ Digraph::Digraph(const Digraph& G) : V_(G.V_), E_(G.E_) {
 }
 
 Digraph& Digraph::operator=(const Digraph& G) {
-	printf("Assigning Digraph");
+	printf("Assigning Digraph\n");
 	if (this == &G) return *this;
 
 	// Free memory

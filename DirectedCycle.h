@@ -30,6 +30,9 @@ class DirectedCycle{
 public:
 	DirectedCycle();
 	DirectedCycle(const Digraph& G);
+	~DirectedCycle();
+	DirectedCycle(const DirectedCycle& other);
+	DirectedCycle& operator=(const DirectedCycle& other);
 	bool hasCycle();
 	Deque<int> cycle();
 
@@ -41,4 +44,5 @@ private:
 	int* edgeTo_;		// edgeTo[v] = previous vertex on path to v
 	bool* onStack_;		// onStack[v] = is vertex on stack?
 	Deque<int> cycle_;	// directed cycle (or empty if no such cycle)
+	int V_;
 };
