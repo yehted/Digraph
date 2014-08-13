@@ -1,7 +1,7 @@
 #include "Digraph.h"
 #include <stdexcept>
 
-Digraph::Digraph() : V_(0), E_(0) {}
+Digraph::Digraph() : V_(0), E_(0), adj_(NULL) {}
 
 Digraph::Digraph(int V) : V_(V), E_(0), adj_(new Bag<int>[V]) {
 	if (V < 0) throw std::invalid_argument("Number of vertices in a Digraph must be nonnegative");

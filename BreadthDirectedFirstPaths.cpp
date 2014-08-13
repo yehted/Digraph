@@ -1,10 +1,14 @@
 #include "BreadthDirectedFirstPaths.h"
-#include <fstream>
-#include <iostream>
 #include <limits>
 
 BreadthFirstDirectedPaths::BreadthFirstDirectedPaths() : 
 marked_(NULL), edgeTo_(NULL), distTo_(NULL), V_(0) {}
+
+BreadthFirstDirectedPaths::BreadthFirstDirectedPaths(const Digraph& G) :
+marked_(new bool[G.V()]()), distTo_(new int[G.V()]), edgeTo_(new int[G.V()]()), V_(G.V()) {
+	for (int v = 0; v < G.V(); v++)
+		distTo_[v] = std::numeric_limits<int>::max();
+}
 
 BreadthFirstDirectedPaths::BreadthFirstDirectedPaths(const Digraph& G, int s) :
 	marked_(new bool[G.V()]()), distTo_(new int[G.V()]), edgeTo_(new int[G.V()]()), V_(G.V()) {
@@ -21,13 +25,14 @@ marked_(new bool[G.V()]()), distTo_(new int[G.V()]), edgeTo_(new int[G.V()]()), 
 }
 
 BreadthFirstDirectedPaths::~BreadthFirstDirectedPaths() {
+//	printf("Deleting BDFP\n");
 	delete[] marked_;
 	delete[] edgeTo_;
 	delete[] distTo_;
 }
 
-BreadthFirstDirectedPaths::BreadthFirstDirectedPaths(const BreadthFirstDirectedPaths& other) : V_(other.V_) {
-	std::cout << "Copying BDFP" << std::endl;
+BreadthFirstDirectedPaths::BreadthFirstDirectedPaths(const BreadthFirstDirectedPaths& other) : V_(other.V_), visited_(other.visited_) {
+//	printf("Copying BDFP\n");
 	marked_ = new bool[V_];
 	edgeTo_ = new int[V_];
 	distTo_ = new int[V_];
@@ -39,9 +44,10 @@ BreadthFirstDirectedPaths::BreadthFirstDirectedPaths(const BreadthFirstDirectedP
 }
 
 BreadthFirstDirectedPaths& BreadthFirstDirectedPaths::operator=(const BreadthFirstDirectedPaths& other) {
-	std::cout << "Assigning BDFP" << std::endl;
+//	printf("Assigning BDFP\n");
 	if (this == &other) return *this;
 	V_ = other.V_;
+	visited_ = other.visited_;
 	
 	// Free memory
 	delete[] marked_;
@@ -68,6 +74,7 @@ void BreadthFirstDirectedPaths::bfs(const Digraph& G, int s) {
 	marked_[s] = true;
 	distTo_[s] = 0;
 	q.addFirst(s);
+	visited_.add(s);					// to keep track of visited vertices
 	while (!q.isEmpty()) {
 		int v = q.removeLast();
 		for (int w : G.adj(v)) {
@@ -76,6 +83,7 @@ void BreadthFirstDirectedPaths::bfs(const Digraph& G, int s) {
 				distTo_[w] = distTo_[v] + 1;
 				marked_[w] = true;
 				q.addFirst(w);
+				visited_.add(w);		// to keep track of visited vertices
 			}
 		}
 	}
@@ -87,6 +95,7 @@ void BreadthFirstDirectedPaths::bfs(const Digraph& G, Bag<int>& sources) {
 		marked_[s] = true;
 		distTo_[s] = 0;
 		q.addFirst(s);
+		visited_.add(s);				// to keep track of visited vertices
 	}	
 	while (!q.isEmpty()) {
 		int v = q.removeLast();
@@ -96,9 +105,31 @@ void BreadthFirstDirectedPaths::bfs(const Digraph& G, Bag<int>& sources) {
 				distTo_[w] = distTo_[v] + 1;
 				marked_[w] = true;
 				q.addFirst(w);
+				visited_.add(w);		// to keep track of visited vertices
 			}
 		}
 	}
+}
+
+void BreadthFirstDirectedPaths::reset() {
+	for (int v : visited_) {
+		marked_[v] = false;
+		edgeTo_[v] = 0;
+		distTo_[v] = std::numeric_limits<int>::max();
+	}
+	visited_.clear();
+}
+
+void BreadthFirstDirectedPaths::search(const Digraph& G, int s) {
+	if (G.V() != V_) throw std::invalid_argument("Digraphs not the same size");
+	reset();
+	bfs(G, s);
+}
+
+void BreadthFirstDirectedPaths::search(const Digraph& G, Bag<int>& sources) {
+	if (G.V() != V_) throw std::invalid_argument("Digraphs not the same size");
+	reset();
+	bfs(G, sources);
 }
 
 bool BreadthFirstDirectedPaths::hasPathTo(int v) {

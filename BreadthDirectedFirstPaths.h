@@ -45,15 +45,19 @@
 #include "Digraph.h"
 #include <limits>
 #include <Deque\Deque\Deque.h>
+#include <Bag\Bag\Queue.h>
 
 class BreadthFirstDirectedPaths {
 public:
 	BreadthFirstDirectedPaths();
+	BreadthFirstDirectedPaths(const Digraph& G);		// for optimization
 	BreadthFirstDirectedPaths(const Digraph& G, int s);
 	BreadthFirstDirectedPaths(const Digraph& G, Bag<int>& sources);
 	~BreadthFirstDirectedPaths();
 	BreadthFirstDirectedPaths(const BreadthFirstDirectedPaths& other);
 	BreadthFirstDirectedPaths& operator=(const BreadthFirstDirectedPaths& other);
+	void search(const Digraph& G, int s);				// for optimization
+	void search(const Digraph& G, Bag<int>& sources);	// for optimization
 	bool hasPathTo(int v);
 	int distTo(int v);
 	Deque<int> pathTo(int v);
@@ -61,7 +65,9 @@ public:
 private:
 	void bfs(const Digraph& G, int s);
 	void bfs(const Digraph& G, Bag<int>& sources);
+	void reset();										// for optimization
 
+	Bag<int> visited_;									// for optimization
 	bool* marked_;
 	int* edgeTo_;
 	int* distTo_;

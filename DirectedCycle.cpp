@@ -1,6 +1,4 @@
 #include "DirectedCycle.h"
-#include <fstream>
-#include <iostream>
 
 DirectedCycle::DirectedCycle() {}
 
